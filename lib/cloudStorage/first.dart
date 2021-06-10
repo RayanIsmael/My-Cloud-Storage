@@ -1,10 +1,9 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class First1 extends StatefulWidget {
   First1({Key? key}) : super(key: key);
@@ -15,30 +14,7 @@ class First1 extends StatefulWidget {
 
 class _First1State extends State<First1> {
   ///////////////////////////////
-  File? file;
 
-  var imagepicker = ImagePicker();
-
-  First1(context) async {
-    var imgpick = await imagepicker.getImage(source: ImageSource.camera);
-    if (imgpick != null) {
-      file = File(imgpick.path);
-      var nameimage = basename(imgpick.path);
-
-      var ref = FirebaseStorage.instance.ref("images/$nameimage");
-      await ref.putFile(file!).then((value) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text("Added")));
-      });
-      var url = ref.getDownloadURL();
-      print(url);
-    } else {
-      print("Error");
-    }
-    print("Loding ...");
-  }
-
-  /////////////////
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,8 +33,9 @@ class _First1State extends State<First1> {
               children: [
                 Text("Image_Picker"),
                 IconButton(
-                  onPressed: () async{
-                    await First1(context);
+                  onPressed: () async {
+                    await secondTestUseingChildInRefAndUseingRandomName(
+                        context);
                   },
                   icon: Icon(Icons.camera_alt_rounded),
                 ),
@@ -71,7 +48,59 @@ class _First1State extends State<First1> {
       /////////////////
     );
   }
+
+  ///////////////////////
+  first1(context) async {
+    File? file;
+    var imagepicker = ImagePicker();
+    var imgpick = await imagepicker.getImage(source: ImageSource.camera);
+    if (imgpick != null) {
+      file = File(imgpick.path);
+      var nameimage = basename(imgpick.path);
+
+      var ref = FirebaseStorage.instance.ref("images/$nameimage");
+      await ref.putFile(file).then((value) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("Added")));
+      });
+      var url = ref.getDownloadURL();
+      print(url);
+    } else {
+      print("Error");
+    }
+    print("Loding ...");
+  }
+
+  /////////////////
   ////////////////////
-  
+  secondTestUseingChildInRefAndUseingRandomName(context) async {
+    File? file;
+    ImagePicker imagepicker = ImagePicker();
+
+    var pickimage = await imagepicker.getImage(source: ImageSource.camera);
+    ////
+    if (pickimage != null) {
+      file = File(pickimage.path);
+      var imagename = basename(pickimage.path);
+      ////
+      var unicname = Random().nextInt(100000);
+      String unicqImageNameRandom = "$unicname--$imagename";
+      ////
+      String datetime = DateTime.now().toString();
+      String uniqImageNameDateTime = "$datetime--$imagename";
+      ////
+      var ref = FirebaseStorage.instance
+          .ref("images")
+          .child("child")
+          .child(imagename);
+      await ref.putFile(file).then((value) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text("ADDED")));
+      });
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("ERROR")));
+    }
+  }
   ////////////////////
 }
