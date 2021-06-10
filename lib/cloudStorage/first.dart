@@ -34,8 +34,7 @@ class _First1State extends State<First1> {
                 Text("Image_Picker"),
                 IconButton(
                   onPressed: () async {
-                    await secondTestUseingChildInRefAndUseingRandomName(
-                        context);
+                    await getNameOfImageInFirebase();
                   },
                   icon: Icon(Icons.camera_alt_rounded),
                 ),
@@ -102,5 +101,23 @@ class _First1State extends State<First1> {
           .showSnackBar(SnackBar(content: Text("ERROR")));
     }
   }
+
   ////////////////////
+  getNameOfImageInFirebase() async {
+    var ref = await FirebaseStorage.instance
+        .ref("images/child")
+        .list(ListOptions(maxResults: 100));
+
+    ref.items.forEach((element) {
+      print("++++++++++++++++++++++++");
+      print(element.fullPath);
+      print(element.name);
+    });
+
+    /*//get name of folder
+    ref.prefixes.forEach((element) {
+      print(element.name);
+    });
+     */
+  }
 }
