@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1028244704425",
+    "project_id": "my-cloud-storage-89f1c",
+    "storage_bucket": "my-cloud-storage-89f1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028244704425:android:5a28883bb49a9157f5edb8",
+        "android_client_info": {
+          "package_name": "com.example.my_cloudstorage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028244704425-7sn2sbhgrkq2f2efutepcmeptv0m8q65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSVZekqAg9VNQXssJSfDfbAvJyea42F2I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028244704425-7sn2sbhgrkq2f2efutepcmeptv0m8q65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
