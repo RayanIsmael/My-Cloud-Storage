@@ -34,7 +34,7 @@ class _First1State extends State<First1> {
                 Text("Image_Picker"),
                 IconButton(
                   onPressed: () async {
-                    await getNameOfImageInFirebase();
+                    await first1(context);
                   },
                   icon: Icon(Icons.camera_alt_rounded),
                 ),
