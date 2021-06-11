@@ -63,12 +63,10 @@ class _PickImageState extends State<PickImage> {
                       },
                       icon: Icon(Icons.add_a_photo_rounded))
                   : Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: FileImage(
-                                image[index - 1],
-                              ),
-                              fit: BoxFit.fill)),
+                      child: Image(image: FileImage(
+                        image[index-1]
+                      ),
+                      fit: BoxFit.fill,),
                     );
             },
           ),
@@ -131,3 +129,11 @@ class _PickImageState extends State<PickImage> {
     super.initState();
   }
 }
+
+
+/**decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: FileImage(
+                                image[index - 1],
+                              ),
+                              fit: BoxFit.fill)), */

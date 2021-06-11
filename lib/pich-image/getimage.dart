@@ -35,11 +35,8 @@ class _DisplayState extends State<Display> {
                       itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         return Container(
-                            child: FadeInImage.assetNetwork(
-                          placeholder: 'images/12.png',
-                          image: snapshot.data!.docs[index].get("url"),
-                          fit: BoxFit.fill,
-                        ));
+                            child:Image.network(snapshot.data!.docs[index].data()["url"],fit: BoxFit.fill,)
+                            );
                       },
                     ),
                   );
@@ -49,3 +46,8 @@ class _DisplayState extends State<Display> {
         );
   }
 }
+/**FadeInImage.assetNetwork(
+                          placeholder: 'images/12.png',
+                          image: snapshot.data!.docs[index].get("url"),
+                          fit: BoxFit.fill,
+                        ) */
